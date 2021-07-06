@@ -1,0 +1,3 @@
+class Samurai < Player
+    
+end

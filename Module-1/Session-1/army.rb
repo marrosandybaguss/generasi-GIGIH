@@ -1,0 +1,3 @@
+class Army < Player
+    
+end
