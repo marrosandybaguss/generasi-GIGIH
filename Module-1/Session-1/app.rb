@@ -1,8 +1,9 @@
-require_relative "player.rb"
+require_relative "samurai.rb"
+require_relative "army.rb"
 
 
-sandy = Player.new("Sandy", 100, 50)
-bagus = Player.new("Bagus", 500, 50)
+sandy = Samurai.new("Sandy", 100, 50)
+bagus = Army.new("Bagus", 500, 50)
 puts sandy
 puts bagus
 puts "\n"

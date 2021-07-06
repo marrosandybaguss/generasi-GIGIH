@@ -1,3 +1,5 @@
+require_relative "player.rb"
+
 class Army < Player
 
     def attack(other_person)
