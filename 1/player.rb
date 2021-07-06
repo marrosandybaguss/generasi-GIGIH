@@ -13,8 +13,18 @@ class Player
   end
   
   def attack(other_person)
-    other_person.take_demage(@attack_demage)
     puts "#{@name} attacks #{other_person.name} with #{@attack_demage} demage."
+
+    if other_person.name == "Sandy"
+      if !deflect()
+        other_person.take_demage(@attack_demage)
+      else
+        puts "#{other_person.name} deflects the attack."
+      end
+    else
+      other_person.take_demage(@attack_demage)
+    end
+    
   end
   
   def take_demage(demage)
@@ -26,6 +36,11 @@ class Player
       puts "#{@name} dies."
       true
     end
+  end
+
+  def deflect()
+    probability = [true, true, true, true, true, true, true, true, false, false]
+    probability.shuffle.first
   end
   
 end
