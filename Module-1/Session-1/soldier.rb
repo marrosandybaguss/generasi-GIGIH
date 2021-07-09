@@ -1,6 +1,6 @@
 require_relative "player.rb"
 
-class Army < Player
+class Soldier < Player
 
     def attack(other_person)
         puts "#{@name} attacks #{other_person.name} with #{@attack_demage} demage."
