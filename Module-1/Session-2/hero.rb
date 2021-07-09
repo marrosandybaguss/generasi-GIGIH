@@ -4,6 +4,7 @@ class Hero < Person
     def initialize(name, hitpoint, attack_demage)
         super(name, hitpoint, attack_demage)
         @deflect_precentage = 0.8
+        @restrore_hitpoint = 20
     end
 
     def take_demage(demage)
@@ -12,6 +13,11 @@ class Hero < Person
         else
             @hitpoint -= demage
         end    
+    end
+
+    def heal(other_person)
+        other_person.take_heal(@restrore_hitpoint)
+        puts "#{@name} heals #{other_person.name}, restroring #{@restrore_hitpoint} hitpoints."
     end
 
 end
