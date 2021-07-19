@@ -1,0 +1,18 @@
+<h1>Items</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+    <tr>
+    <% items.each do |item| %>
+    <tr>
+        <th><%= item.name %></th>
+        <th><%= item.price %></th>
+        <th><%= item.category.name %></th>
+    <tr>
+    <% end %>
+</table>
+
+<a href="/items/with-category/create">Create item with category</a>
