@@ -24,9 +24,23 @@ post '/item/create' do
 end
 
 get '/item/edit' do
-    erb :edit
+    item_id = params['id'].to_i
+    item = get_item_with_category(item_id)
+    categories = get_all_categories
+    erb :edit, locals:{
+        item: item,
+        categories: categories
+    }
 end
 
+post '/item/edit' do
+    id = params['id']
+    name = params['name']
+    price = params['price']
+    category = params['category']
+    update_item_with_category(id, name, price, category)
+    redirect '/'
+end
 
 get '/item/show' do
     item_id = params['id'].to_i

@@ -77,3 +77,9 @@ def get_item_with_category(item_id)
     end 
     item
 end
+
+def update_item_with_category(id, name, price, category)
+    client = create_db_client
+    client.query("UPDATE items SET name = '#{name}', price = #{price} WHERE id = #{id}")
+    client.query("UPDATE item_categories SET category_id = #{category} WHERE item_id = #{id}")
+end
