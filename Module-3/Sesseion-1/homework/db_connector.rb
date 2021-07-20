@@ -65,3 +65,15 @@ def insert_item_with_category(name, price, category)
     item_id = client.last_id()
     client.query("insert into item_categories (item_id, category_id) values (#{item_id}, #{category})")
 end
+
+def get_item_with_category(item_id)
+    client = create_db_client
+    rawData = client.query("select i.*, c.id as 'category_id', c.name as 'category_name' from items i left join item_categories ic on ic.item_id = i.id left join categories c on c.id = ic.category_id where i.id = #{item_id}")
+    item = nil
+
+    rawData.each do |data|
+        category = Category.new(data["category_id"], data["category_name"])
+        item = Item.new(data["id"], data["name"], data["price"], category)
+    end 
+    item
+end

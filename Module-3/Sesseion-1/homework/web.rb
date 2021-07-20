@@ -23,6 +23,19 @@ post '/item/create' do
     redirect '/'
 end
 
+get '/item/edit' do
+    erb :edit
+end
 
 
+get '/item/show' do
+    item_id = params['id'].to_i
+    item = get_item_with_category(item_id)
+    erb :show, locals:{
+        item: item
+    }
+end
 
+get '/item/delete' do
+    redirect '/'
+end
