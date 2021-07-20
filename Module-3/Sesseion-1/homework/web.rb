@@ -51,5 +51,7 @@ get '/item/show' do
 end
 
 get '/item/delete' do
+    item_id = params['id'].to_i
+    delete_item_with_category(item_id)
     redirect '/'
 end

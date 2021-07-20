@@ -83,3 +83,9 @@ def update_item_with_category(id, name, price, category)
     client.query("UPDATE items SET name = '#{name}', price = #{price} WHERE id = #{id}")
     client.query("UPDATE item_categories SET category_id = #{category} WHERE item_id = #{id}")
 end
+
+def delete_item_with_category(item_id)
+    client = create_db_client
+    client.query("DELETE FROM items WHERE id=#{item_id}")
+    client.query("DELETE FROM item_categories WHERE item_id=#{item_id}")
+end
