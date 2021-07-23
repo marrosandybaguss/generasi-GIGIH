@@ -19,8 +19,5 @@ class Category
         end 
         categories
     end
-
-    def insert
-        pass
-    end
+  
 end

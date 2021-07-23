@@ -1,0 +1,18 @@
+<h1>Items</h1>
+
+<table>
+    <tr>
+        <th>Reference Number</th>
+        <th>Customer Name</th>
+        <th>Date</th>
+    <tr>
+    <% orders.each do |order| %>
+    <tr>
+        <td><%= order.reference_no %></td>
+        <td><%= order.customer_name %></td>
+        <td><%= order.date %></td>
+    <tr>
+    <% end %>
+</table>
+
+<a href="/order/create">Create Order </a>

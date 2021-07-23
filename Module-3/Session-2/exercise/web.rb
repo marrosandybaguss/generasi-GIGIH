@@ -20,14 +20,15 @@ post '/item/create' do
     name = params['name']
     price = params['price']
     category = params['category']
-    insert_item_with_category(name, price, category)
+    item = Item.new(nil, name, price)
+    item.insert_item_with_category(category)
     redirect '/'
 end
 
 get '/item/edit' do
     item_id = params['id'].to_i
-    item = get_item_with_category(item_id)
-    categories = get_all_categories
+    item = Item.get_item_with_category(item_id)
+    categories = Category.get_all_categories
     erb :edit, locals:{
         item: item,
         categories: categories
@@ -39,13 +40,14 @@ post '/item/edit' do
     name = params['name']
     price = params['price']
     category = params['category']
-    update_item_with_category(id, name, price, category)
+    item = Item.new(id, name, price)
+    item.update_item_with_category(category)
     redirect '/'
 end
 
 get '/item/show' do
     item_id = params['id'].to_i
-    item = get_item_with_category(item_id)
+    item = Item.get_item_with_category(item_id)
     erb :show, locals:{
         item: item
     }
@@ -53,6 +55,7 @@ end
 
 get '/item/delete' do
     item_id = params['id'].to_i
-    delete_item_with_category(item_id)
+    item = Item.new(item_id, nil, nil)
+    item.delete_item_with_category
     redirect '/'
 end
