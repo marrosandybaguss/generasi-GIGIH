@@ -1,0 +1,13 @@
+<h1>Edit item</h1>
+
+<form method="POST" action="/item/edit">
+    <input type="number" name="id" value="<%= item.id %>" hidden>
+    <input type="text" name="name" value="<%= item.name %>">
+    <input type="number" name="price" value="<%= item.price %>">
+    <p>Select category</p>
+    <% categories.each do |category| %>
+      <input type="radio" id="<%= category.id %>" name="category" value="<%= category.id %>" <% if category.id == item.category.id %> checked="checked" <% end %>>
+      <label for="<%= category.id %>"><%= category.name %></label><br>
+    <% end %>
+    <br><input type="submit" value="Update">
+</form>
