@@ -18,4 +18,12 @@ RSpec.describe IncrementInteger do
         expect(result).to eq([4, 0])
     end
 
+    it '99 to 100' do
+        increment_integer = IncrementInteger.new
+
+        result = increment_integer.increment([3, 9])
+
+        expect(result).to eq([4, 0])
+    end
+
 end
