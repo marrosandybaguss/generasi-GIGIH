@@ -1,11 +1,6 @@
 require './models/category'
 
 class CategoryController
-    def show
-        renderer = ERB.new(File.read('./views/tes.erb'))
-        renderer.result(binding)
-    end
-
     def list_categories
         categories = Category.get_all_categories
         renderer = ERB.new(File.read('./views/index_category.erb'))
