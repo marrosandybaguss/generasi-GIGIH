@@ -1,6 +1,7 @@
 require 'sinatra'
 require './controllers/post_controller'
 require './controllers/comment_controller'
+require './controllers/trending_controller'
 
 
 post '/post' do
@@ -16,7 +17,7 @@ get '/posts/:hastagh' do
 end
 
 get '/trending' do
-    controller = PostController.new
+    controller = TrendingController.new
     controller.trending_hastagh
 end
 

@@ -5,7 +5,7 @@ def create_db_client
         :host => "localhost",
         :username => "root",
         :password => "mypassword",
-        :database => "social_media"
+        :database => "tes_final_project"
     )
     client
 end
