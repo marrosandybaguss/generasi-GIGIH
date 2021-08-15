@@ -8,10 +8,22 @@ class Post
         @post = post
         @time = time
     end
-    
+
     def insert_post
         client = create_db_client
         client.query("INSERT INTO posts (post) VALUES ('#{@post}')")
+    end
+
+    def self.get_all_posts
+        client = create_db_client
+        rawData = client.query("select * from posts")
+        posts = Array.new
+    
+        rawData.each do |data|
+            post = {:id => data['id'], :post => data['post'], :time => data['reg_date']}
+            posts << post
+        end 
+        posts
     end
 end
 
