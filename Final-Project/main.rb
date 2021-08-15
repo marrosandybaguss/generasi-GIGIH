@@ -19,3 +19,8 @@ get '/trending' do
     controller = PostController.new
     controller.trending_hastagh
 end
+
+post '/comment' do
+    controller = CommentController.new
+    controller.create_comment(params)
+end
