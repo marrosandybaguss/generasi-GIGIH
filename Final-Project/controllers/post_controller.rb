@@ -8,19 +8,9 @@ class PostController
         posts.insert_post
     end
 
-    def list_posts_with_hastagh(hastagh)
-        posts = Post.get_all_posts
-        postsFiltered = Array.new
-
-        posts.each do |row|
-            post = row[:post]
-            if post.include? "#{hastagh}"
-                postFiltered = {:id => row[:id], :post => post, :time => row[:time]}
-                postsFiltered << postFiltered
-            end
-        end
-
-        postsFiltered.to_json
+    def list_filter_posts(hastagh)
+        posts = Post.get_filter_posts(hastagh)
+        posts.to_json
     end
 
 end

@@ -14,9 +14,9 @@ class Post
         client.query("INSERT INTO posts (post) VALUES ('#{@post}')")
     end
 
-    def self.get_all_posts
+    def self.get_filter_posts(hastagh)
         client = create_db_client
-        rawData = client.query("select * from posts")
+        rawData = client.query("select * from posts where post like '%#{hastagh}%'")
         posts = Array.new
     
         rawData.each do |data|

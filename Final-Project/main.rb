@@ -12,5 +12,5 @@ get '/posts/:hastagh' do
     hastagh = params['hastagh']
     hastagh = '#' + hastagh
     controller = PostController.new
-    controller.list_posts_with_hastagh(hastagh)
+    controller.list_filter_posts(hastagh)
 end
