@@ -12,62 +12,50 @@ class TrendingController
         trendingHastaghs = Array.new
 
         posts.each do |row|
-            # one post
             post = row[:post]
-            # post with hastagh will process
-            if post.include? "#"
-                # split post menjadi kata per kata
-                words = post.split(' ')
-                checkSimilarHastagh = ''
-                words.each do |word|
-                    # get instance hastagh
-                    if word.include? "#"
-                        # get one similiar hastagh
-                        if checkSimilarHastagh.include? word
-                        else
-                            checkSimilarHastagh = checkSimilarHastagh + " " + word
-                            hastaghs.push(word)
-                        end
-                    end
-                end
-            end
+            containing_hastaghs(hastaghs, post)
         end
 
         comments.each do |row|
-            # one comment
             comment = row[:comment]
-            # comment with hastagh will process
-            if comment.include? "#"
-                # split comment menjadi kata per kata
-                words = comment.split(' ')
-                checkSimilarHastagh = ''
-                words.each do |word|
-                    # get instance hastagh
-                    if word.include? "#"
-                        # get one similiar hastagh
-                        if checkSimilarHastagh.include? word
-                        else
-                            checkSimilarHastagh = checkSimilarHastagh + " " + word
-                            hastaghs.push(word)
-                        end
+            containing_hastaghs(hastaghs, comment)
+        end
+        
+        produce_top_hastagh(trendingHastaghs, hastaghs, top)
+
+        trendingHastaghs.to_json
+    end
+
+    def containing_hastaghs(hastaghArray, data)
+        if data.include? "#"
+            # split data menjadi kata per kata
+            words = data.split(' ')
+            checkSimilarHastagh = ''
+            words.each do |word|
+                # get instance hastagh
+                if word.include? "#"
+                    # get one similiar hastagh
+                    if checkSimilarHastagh.include? word
+                    else
+                        checkSimilarHastagh = checkSimilarHastagh + " " + word
+                        hastaghArray.push(word)
                     end
                 end
             end
         end
+    end
 
+    def produce_top_hastagh(trendingHastaghs, hastaghs, top)
         for i in 1..top
-            # get hastagh terbanyak
             freq = hastaghs.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
             mostHastagh = hastaghs.max_by { |v| freq[v] }
-            # assign in array trendinghastagh
+            
             trending = {:hastagh => mostHastagh, :trending => i}
             trendingHastaghs << trending
-            # delete hastagh terbanyak, sehingga didapatkan hastagh terbanyak berikutnya
+            
             hastaghs.delete(mostHastagh)
          end
-         
-
-        trendingHastaghs.to_json
     end
+
     
 end
