@@ -14,3 +14,8 @@ get '/posts/:hastagh' do
     controller = PostController.new
     controller.list_filter_posts(hastagh)
 end
+
+get '/trending' do
+    controller = PostController.new
+    controller.trending_hastagh
+end

@@ -25,5 +25,17 @@ class Post
         end 
         posts
     end
+
+    def self.get_post_24hours
+        client = create_db_client
+        rawData = client.query("SELECT * FROM posts WHERE reg_date > DATE_SUB(CURDATE(), INTERVAL 1 DAY)")
+        posts = Array.new
+    
+        rawData.each do |data|
+            post = {:id => data['id'], :post => data['post'], :time => data['reg_date']}
+            posts << post
+        end 
+        posts
+    end
 end
 
