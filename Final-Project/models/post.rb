@@ -39,4 +39,9 @@ class Post
     end
     posts
   end
+
+  def valid?
+    return false if @post.nil?
+    true
+  end
 end
