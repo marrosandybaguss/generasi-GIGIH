@@ -13,8 +13,12 @@ class Comment
   end
 
   def insert_comment
-    client = create_db_client
-    client.query("INSERT INTO comments (post_id, comment) VALUES (#{@post_id}, '#{@comment}')")
+    if valid?
+      client = create_db_client
+      client.query("INSERT INTO comments (post_id, comment) VALUES (#{@post_id}, '#{@comment}')")
+      return true
+    end
+    false
   end
 
   def self.select_comment_24hours
