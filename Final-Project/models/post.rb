@@ -14,6 +14,7 @@ class Post
   def insert_post
     client = create_db_client
     client.query("INSERT INTO posts (post) VALUES ('#{@post}')")
+    client.last_id()
   end
 
   def self.select_filter_posts(hastagh)
