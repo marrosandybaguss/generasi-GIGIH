@@ -10,20 +10,18 @@ class TrendingController
     comments = Comment.select_comment_24hours
     hastaghs = []
     top = 5
-    trending_hastaghs = []
 
     posts.each do |row|
       post = row[:post]
-      containing_hastaghs(hastaghs, post)
+      hastaghs = containing_hastaghs(hastaghs, post)
     end
 
     comments.each do |row|
       comment = row[:comment]
-      containing_hastaghs(hastaghs, comment)
+      hastaghs = containing_hastaghs(hastaghs, comment)
     end
 
-    produce_top_hastagh(trending_hastaghs, hastaghs, top)
-
+    trending_hastaghs = produce_top_hastagh(hastaghs, top)
     trending_hastaghs.to_json
   end
 
@@ -38,9 +36,11 @@ class TrendingController
         end
       end
     end
+    hastagh_array
   end
 
-  def produce_top_hastagh(trending_hastaghs, hastaghs, top)
+  def produce_top_hastagh(hastaghs, top)
+    trending_hastaghs = []
     (1..top).each do |i|
       freq = hastaghs.each_with_object(Hash.new(0)) do |v, h|
         h[v] += 1
@@ -52,5 +52,6 @@ class TrendingController
 
       hastaghs.delete(most_hastagh)
     end
+    trending_hastaghs
   end
 end
