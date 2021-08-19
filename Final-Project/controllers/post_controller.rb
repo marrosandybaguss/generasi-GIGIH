@@ -6,8 +6,8 @@ require_relative '../models/post'
 class PostController
   def create_post(params)
     posts = Post.new(nil, params[:post])
-    responseId = posts.insert_post
-    if responseId
+    response = posts.insert_post
+    if response
       return {
         'status' => 200,
         'message' => 'Success'
