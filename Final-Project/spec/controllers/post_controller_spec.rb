@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'json'
+require_relative "../test_helper"
 require_relative '../../controllers/post_controller'
 require_relative '../../models/post'
 
