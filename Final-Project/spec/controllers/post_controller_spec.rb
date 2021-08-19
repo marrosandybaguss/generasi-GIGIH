@@ -37,5 +37,25 @@ describe PostController do
                                         })
       end
     end
+
+    context 'with invalid parameter' do
+        it 'create a new post' do
+          post_controller = PostController.new
+          post_params = { id: nil, post: nil }
+  
+          stub_model = double
+          mock_post_return = double
+          controller_result = post_controller.create_post(post_params)
+  
+          allow(Post).to receive(:new).with(post_params).and_return(stub_model)
+          allow(stub_model).to receive(:insert_post).and_return(mock_post_return)
+          allow(mock_post_return).to receive(:each)
+  
+          expect(controller_result).to eq({
+                                            'status' => 400,
+                                            'message' => 'Fail'
+                                          })
+        end
+      end
   end
 end
