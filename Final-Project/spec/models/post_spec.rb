@@ -25,7 +25,7 @@ describe Post do
         stub_client = double
         hastagh = '#post'
         stub_query = "select * from posts where post like '%#{hastagh}%'"
-        posts = [{ "id": 5, "post": 'This is #post' }]
+        posts = [{ "id": 5, "post": 'This is #post', "time":"2021-08-15 22:21:30 +0700" }]
 
         allow(Mysql2::Client).to receive(:new).and_return(stub_client)
         expect(stub_client).to receive(:query).with(stub_query).and_return(posts)
@@ -39,7 +39,7 @@ describe Post do
       it 'should return all of data post in one day' do
         stub_client = double
         stub_query = 'SELECT * FROM posts WHERE reg_date > DATE_SUB(CURDATE(), INTERVAL 1 DAY)'
-        posts = [{ "id": 5, "post": 'This is #post' }]
+        posts = [{ "id": 5, "post": 'This is #post', "time":"2021-08-15 22:21:30 +0700" }]
 
         allow(Mysql2::Client).to receive(:new).and_return(stub_client)
         expect(stub_client).to receive(:query).with(stub_query).and_return(posts)
@@ -55,7 +55,7 @@ describe Post do
       it 'should save data' do
         stub_client = double
         stub_query = "INSERT INTO posts (post) VALUES ('This is #post')"
-        post = Post.new(5, 'This is #post')
+        post = Post.new(nil, 'This is #post')
 
         allow(Mysql2::Client).to receive(:new).and_return(stub_client)
         expect(stub_client).to receive(:query).with(stub_query)

@@ -24,7 +24,7 @@ describe Comment do
       it 'should return all of data comment in one day' do
         stub_client = double
         stub_query = 'SELECT * FROM comments WHERE reg_date > DATE_SUB(CURDATE(), INTERVAL 1 DAY)'
-        comments = [{ "id": 5, "comment_id":5, "comment": 'This is #comment' }]
+        comments = [{ "id": 5, "comment_id":5, "comment": 'This is #comment', "time":"2021-08-15 22:21:30 +0700" }]
 
         allow(Mysql2::Client).to receive(:new).and_return(stub_client)
         expect(stub_client).to receive(:query).with(stub_query).and_return(comments)
