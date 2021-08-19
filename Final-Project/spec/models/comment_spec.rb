@@ -18,4 +18,20 @@ describe Comment do
       end
     end
   end
+
+  describe '#get data' do
+    context 'when execute get all data comment in one day' do
+      it 'should return all of data comment in one day' do
+        stub_client = double
+        stub_query = 'SELECT * FROM comments WHERE reg_date > DATE_SUB(CURDATE(), INTERVAL 1 DAY)'
+        comments = [{ "id": 5, "post_id":5, "comment": 'This is #comment' }]
+
+        allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+        expect(stub_client).to receive(:query).with(stub_query).and_return(comments)
+
+        result = Comment.select_comment_24hours
+        expect(result).not_to be_nil
+      end
+    end
+  end
 end
