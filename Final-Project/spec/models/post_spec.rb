@@ -34,5 +34,20 @@ describe Post do
         expect(result).not_to be_nil
       end
     end
+
+    context 'when execute get all data post in one day' do
+        it 'should return all of data post in one day' do
+          stub_client = double
+          hastagh = '#post'
+          stub_query = 'SELECT * FROM posts WHERE reg_date > DATE_SUB(CURDATE(), INTERVAL 1 DAY)'
+          posts = [{ "id": 5, "post": 'This is #post' }]
+  
+          allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+          expect(stub_client).to receive(:query).with(stub_query).and_return(posts)
+  
+          result = Post.select_post_24hours
+          expect(result).not_to be_nil
+        end
+      end
   end
 end
