@@ -29,4 +29,10 @@ class Comment
     end
     comments
   end
+
+  def valid?
+    return false if @post_id.nil?
+    return false if @comment.nil?
+    true
+  end
 end
