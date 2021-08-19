@@ -1,73 +1,56 @@
-require "json"
-require_relative '../models/post.rb'
-require_relative '../models/comment.rb'
+# frozen_string_literal: true
+
+require 'json'
+require_relative '../models/post'
+require_relative '../models/comment'
 
 class TrendingController
+  def trending_hastagh
+    posts = Post.select_post_24hours
+    comments = Comment.select_comment_24hours
+    hastaghs = []
+    top = 5
+    trending_hastaghs = []
 
-    def trending_hastagh
-        posts = Post.get_post_24hours
-        comments = Comment.get_comment_24hours
-        hastaghs = Array.new
-        top = 5
-        trendingHastaghs = Array.new
-
-        posts.each do |row|
-            # one post
-            post = row[:post]
-            # post with hastagh will process
-            if post.include? "#"
-                # split post menjadi kata per kata
-                words = post.split(' ')
-                checkSimilarHastagh = ''
-                words.each do |word|
-                    # get instance hastagh
-                    if word.include? "#"
-                        # get one similiar hastagh
-                        if checkSimilarHastagh.include? word
-                        else
-                            checkSimilarHastagh = checkSimilarHastagh + " " + word
-                            hastaghs.push(word)
-                        end
-                    end
-                end
-            end
-        end
-
-        comments.each do |row|
-            # one comment
-            comment = row[:comment]
-            # comment with hastagh will process
-            if comment.include? "#"
-                # split comment menjadi kata per kata
-                words = comment.split(' ')
-                checkSimilarHastagh = ''
-                words.each do |word|
-                    # get instance hastagh
-                    if word.include? "#"
-                        # get one similiar hastagh
-                        if checkSimilarHastagh.include? word
-                        else
-                            checkSimilarHastagh = checkSimilarHastagh + " " + word
-                            hastaghs.push(word)
-                        end
-                    end
-                end
-            end
-        end
-
-        for i in 1..top
-            # get hastagh terbanyak
-            freq = hastaghs.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
-            mostHastagh = hastaghs.max_by { |v| freq[v] }
-            # assign in array trendinghastagh
-            trending = {:hastagh => mostHastagh, :trending => i}
-            trendingHastaghs << trending
-            # delete hastagh terbanyak, sehingga didapatkan hastagh terbanyak berikutnya
-            hastaghs.delete(mostHastagh)
-         end
-         
-
-        trendingHastaghs.to_json
+    posts.each do |row|
+      post = row[:post]
+      containing_hastaghs(hastaghs, post)
     end
-    
+
+    comments.each do |row|
+      comment = row[:comment]
+      containing_hastaghs(hastaghs, comment)
+    end
+
+    produce_top_hastagh(trending_hastaghs, hastaghs, top)
+
+    trending_hastaghs.to_json
+  end
+
+  def containing_hastaghs(hastagh_array, data)
+    if data.include? '#'
+      words = data.split(' ')
+      check_similar_hastagh = ''
+      words.each do |word|
+        if (!check_similar_hastagh.include? word) && (word.include? '#')
+          check_similar_hastagh = "#{check_similar_hastagh} #{word}"
+          hastagh_array.push(word)
+        end
+      end
+    end
+  end
+
+  def produce_top_hastagh(trending_hastaghs, hastaghs, top)
+    (1..top).each do |i|
+      freq = hastaghs.each_with_object(Hash.new(0)) do |v, h|
+        h[v] += 1
+      end
+      most_hastagh = hastaghs.max_by { |v| freq[v] }
+
+      trending = { hastagh: most_hastagh, trending: i }
+      trending_hastaghs << trending
+
+      hastaghs.delete(most_hastagh)
+    end
+  end
 end
