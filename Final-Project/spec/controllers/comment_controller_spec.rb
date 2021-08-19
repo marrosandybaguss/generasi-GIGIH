@@ -40,8 +40,8 @@ describe CommentController do
         allow(mock_comment_return).to receive(:each)
 
         expect(controller_result).to eq({
-                                        'status' => 400,
-                                        'message' => 'Fail'
+                                          'status' => 400,
+                                          'message' => 'Fail'
                                         })
       end
     end
