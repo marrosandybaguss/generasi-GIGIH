@@ -5,6 +5,10 @@ require './controllers/post_controller'
 require './controllers/comment_controller'
 require './controllers/trending_controller'
 
+before do
+  content_type :json
+end
+
 post '/post' do
   controller = PostController.new
   controller.create_post(params)
