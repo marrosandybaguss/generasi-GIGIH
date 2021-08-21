@@ -1,6 +1,6 @@
 -- MySQL dump 10.19  Distrib 10.3.29-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: tes_final_project
+-- Host: localhost    Database: social_media
 -- ------------------------------------------------------
 -- Server version	10.3.29-MariaDB-0+deb10u1
 
