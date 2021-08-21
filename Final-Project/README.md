@@ -36,7 +36,9 @@ Build Social Media API Aplication
 1. Create MYSQL Database
    - Login to mysql using the username and password. Copy and paste <a href="documentations/query.sql">query.sql</a> contents to mysql.
    - or import <a href="documentations/query.sql">query.sql</a> with terminal.
-   ```mysql -u USERNAME -p social_media < query.sql```
+   ```
+   mysql -u USERNAME -p social_media < query.sql
+   ```
     USERNAME is your mysql username.
 2. Create .env file
     ```
@@ -55,16 +57,24 @@ Build Social Media API Aplication
 # API Documentation
 
 - To Posting
-   ``` /post ```
+   ``` 
+   /post 
+   ```
    - use HTTP POST with ```post``` params in request body. ```post``` param is text you want to post.
 - See Posts that contain certain hashtag
-   ``` /posts/yourhashtag ```
+   ``` 
+   /posts/yourhashtag 
+   ```
    - use HTTP GET. You will get, id of post, post text, and date post was created.
 - Comment a Post
-   ``` /comment ```
+   ``` 
+   /comment 
+   ```
    - use HTTP POST with ```post_id``` and ```comment``` params in request body. ```post_id``` param is id of post which you want to add comment. ```comment``` param is text you want to comment on a post.
 - See Trending hastagh
-   ``` /trending ```
+   ``` 
+   /trending 
+   ```
    - use HTTP GET. You will get, hastagh and the position its trending.
 
 
