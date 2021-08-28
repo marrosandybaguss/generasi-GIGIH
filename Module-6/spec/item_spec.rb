@@ -32,4 +32,28 @@ RSpec.describe Refactoring::Item do
       end
     end
   end
+
+  describe '#returnable?' do
+    context 'when returnable parameter' do
+      it 'should return true' do
+        stub_type = 'BOOK'
+        stub_tags = 'fiction'
+
+        harry_book_item = Refactoring::Item.new(stub_type, 'Harry Potter', 123, 33, stub_tags)
+
+        expect(harry_book_item.returnable?).to eq(true)
+      end
+    end
+
+    context 'when parameter given is not returnable' do
+      it 'should return false' do
+        stub_type = 'DRINK'
+        stub_tags = 'fruit'
+
+        mango_juice_item = Refactoring::Item.new(stub_type, 'Iga', 123, 33, stub_tags)
+
+        expect(mango_juice_item.returnable?).to eq(false)
+      end
+    end
+  end
 end
