@@ -46,11 +46,13 @@ module Refactoring
       case type
       when 'BOOK'
         ['children', 'teen', 'adult', 'fiction', 'non-fiction'].include?(tags)
-      when type == 'ELECTRONIC'
+      when 'ELECTRONIC'
         ['household','office','hobby','sports'].include?(tags)
-      when type == 'DRINK'
+      when 'DRINK'
         ['dairy', 'vegetable', 'fruit', 'coffee', 'tea'].include?(tags)
-      when ['FOOD', 'SNACK'].include?(type)
+      when 'FOOD'
+        ['meat', 'dairy', 'vegetable', 'fruit', 'pastry'].include?(tags)
+      when 'SNACK'
         ['meat', 'dairy', 'vegetable', 'fruit', 'pastry'].include?(tags)
       else false
       end
