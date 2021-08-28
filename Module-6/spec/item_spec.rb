@@ -56,4 +56,59 @@ RSpec.describe Refactoring::Item do
       end
     end
   end
+
+  describe '#Percent of Tax' do
+    context 'when type is book' do
+      it 'should return 10 %' do
+        stub_type = 'BOOK'
+        stub_tags = 'fiction'
+
+        harry_book_item = Refactoring::Item.new(stub_type, 'Harry Potter', 123, 33, stub_tags)
+
+        expect(harry_book_item.tax_in_percent).to eq(10)
+      end
+    end
+
+    context 'when type is electronic' do
+      it 'should return 10 %' do
+        stub_type = 'ELECTRONIC'
+        stub_tags = 'office'
+
+        fan_item = Refactoring::Item.new(stub_type, 'Fan', 123, 33, stub_tags)
+
+        expect(fan_item.tax_in_percent).to eq(15)
+      end
+    end
+
+    context 'when type is food, drink or snack' do
+      it 'should return 5 %' do
+        stub_type_food = 'FOOD'
+        stub_tags_food = 'meat'
+        iga_item = Refactoring::Item.new(stub_type_food, 'Iga', 123, 33, stub_tags_food)
+
+        stub_type_drink = 'DRINK'
+        stub_tags_drink = 'fruit'
+        mango_juice_item = Refactoring::Item.new(stub_type_drink, 'Mango Juice', 123, 33, stub_tags_drink)
+
+        stub_type_snack = 'SNACK'
+        stub_tags_snack = 'meat'
+        sukro_item = Refactoring::Item.new(stub_type_snack, 'Sukro', 123, 33, stub_tags_snack)
+
+        expect(iga_item.tax_in_percent).to eq(5)
+        expect(mango_juice_item.tax_in_percent).to eq(5)
+        expect(sukro_item.tax_in_percent).to eq(5)
+      end
+    end
+
+    # context 'when other type' do
+    #   it 'should return 0 %' do
+    #     stub_type = 'GAME'
+    #     stub_tags = 'diamon'
+
+    #     mobile_legends_item = Refactoring::Item.new(stub_type, 'Mobile Legends', 123, 33, stub_tags)
+
+    #     expect(mobile_legends_item.tax_in_percent).to eq(0)
+    #   end
+    # end
+  end
 end

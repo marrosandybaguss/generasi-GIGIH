@@ -50,9 +50,7 @@ module Refactoring
         ['household','office','hobby','sports'].include?(tags)
       when 'DRINK'
         ['dairy', 'vegetable', 'fruit', 'coffee', 'tea'].include?(tags)
-      when 'FOOD'
-        ['meat', 'dairy', 'vegetable', 'fruit', 'pastry'].include?(tags)
-      when 'SNACK'
+      when 'FOOD', 'SNACK'
         ['meat', 'dairy', 'vegetable', 'fruit', 'pastry'].include?(tags)
       else false
       end
