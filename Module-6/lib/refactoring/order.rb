@@ -2,6 +2,10 @@ module Refactoring
   class Order
     attr_reader :order_items
 
+    def initialize(order_items)
+      @order_items = order_items
+    end
+
     def price_order(voucher, tax, delivery_cost)
       price = 0
   

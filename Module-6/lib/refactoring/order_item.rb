@@ -16,6 +16,8 @@ module Refactoring
           price += (@quantity * @item.price) * 0.9
         elsif @quantity > 2
           price += (@quantity * @item.price) * 0.95
+        else
+          price += @quantity * @item.price
         end
       else
         price += @quantity * @item.price
