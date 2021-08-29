@@ -77,5 +77,29 @@ RSpec.describe Refactoring::OrderItem do
         expect(harry_book_order.calculate_price(voucher)).to eq(price)
       end
     end
+
+    context 'quantity less than 2' do
+      it 'with voucher' do
+        harry_book_item = Refactoring::Item.new('BOOK', 'Harry Potter', 100, 33, 'fiction')
+        quantity = 1
+        harry_book_order = Refactoring::OrderItem.new(harry_book_item, quantity)
+        voucher = true
+
+        price = harry_book_item.price * quantity
+
+        expect(harry_book_order.calculate_price(voucher)).to eq(price)
+      end
+
+      it 'without voucher' do
+        harry_book_item = Refactoring::Item.new('BOOK', 'Harry Potter', 100, 33, 'fiction')
+        quantity = 1
+        harry_book_order = Refactoring::OrderItem.new(harry_book_item, quantity)
+        voucher = false
+  
+        price = harry_book_item.price * quantity
+  
+        expect(harry_book_order.calculate_price(voucher)).to eq(price)
+      end
+    end
   end
 end
