@@ -99,16 +99,5 @@ RSpec.describe Refactoring::Item do
         expect(sukro_item.tax_in_percent).to eq(5)
       end
     end
-
-    # context 'when other type' do
-    #   it 'should return 0 %' do
-    #     stub_type = 'GAME'
-    #     stub_tags = 'diamon'
-
-    #     mobile_legends_item = Refactoring::Item.new(stub_type, 'Mobile Legends', 123, 33, stub_tags)
-
-    #     expect(mobile_legends_item.tax_in_percent).to eq(0)
-    #   end
-    # end
   end
 end

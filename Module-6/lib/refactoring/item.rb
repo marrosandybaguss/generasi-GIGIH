@@ -30,9 +30,8 @@ module Refactoring
         10
       when 'ELECTRONIC'
         15
-      when 'FOOD', 'DRINK', 'SNACK'
+      else
         5
-      else 0
       end
     end
 
