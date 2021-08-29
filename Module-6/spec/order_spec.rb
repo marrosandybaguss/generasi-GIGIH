@@ -16,10 +16,10 @@ RSpec.describe Refactoring::Order do
 
   describe 'Price of Order' do
     it 'with voucher' do
-      marro_order = Refactoring::Order.new(@order_items)
-      voucher = true
       tax = 0.1
       delivery_cost = 25
+      marro_order = Refactoring::Order.new(@order_items, tax, delivery_cost)
+      voucher = true
 
       mock_price = 0
       mock_price += @order_items[0].calculate_price(voucher)
@@ -28,14 +28,14 @@ RSpec.describe Refactoring::Order do
       mock_price_after_tax = mock_price + (tax * mock_price)
       total_mock_price = mock_price_after_tax + delivery_cost
 
-      expect(marro_order.price_order(voucher, tax, delivery_cost)).to eq(total_mock_price)
+      expect(marro_order.price_order(voucher)).to eq(total_mock_price)
     end
 
     it 'without voucher' do
-      marro_order = Refactoring::Order.new(@order_items)
-      voucher = false
       tax = 0.1
       delivery_cost = 25
+      marro_order = Refactoring::Order.new(@order_items, tax, delivery_cost)
+      voucher = false
 
       mock_price = 0
       mock_price += @order_items[0].calculate_price(voucher)
@@ -44,7 +44,7 @@ RSpec.describe Refactoring::Order do
       mock_price_after_tax = mock_price + (tax * mock_price)
       total_mock_price = mock_price_after_tax + delivery_cost
 
-      expect(marro_order.price_order(voucher, tax, delivery_cost)).to eq(total_mock_price)
+      expect(marro_order.price_order(voucher)).to eq(total_mock_price)
     end
   end
 end

@@ -1,20 +1,22 @@
 module Refactoring
   class Order
-    attr_reader :order_items
+    attr_reader :order_items, :tax, :delivery_cost
 
-    def initialize(order_items)
+    def initialize(order_items, tax, delivery_cost)
       @order_items = order_items
+      @tax = tax
+      @delivery_cost = delivery_cost
     end
 
-    def price_order(voucher, tax, delivery_cost)
+    def price_order(voucher)
       price = 0
   
       order_items.each do |order_item|
         price += order_item.calculate_price(voucher)
       end
   
-      price_after_tax = price + (tax * price)
-      total_price = price_after_tax + delivery_cost
+      price_after_tax = price + (@tax * price)
+      total_price = price_after_tax + @delivery_cost
     end  
 
     def print_order_summary
