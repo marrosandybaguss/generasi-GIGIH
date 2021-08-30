@@ -17,6 +17,6 @@
    - <a href="Module-4/Session-2">Session 2</a>: TDD (Test-Driven Development) and Test Coverage
    - <a href="Module-4/Session-3">Session 3</a>: MVC Unit Test
 5. Module 5: Git Advance, Deployments (Deploy Service Manually on Virtual Machine), and CI/CD
-6. Module 6: Clean Code & General Principle, Code Smell, and Refactoring
+6. <a href="Module-6">Module 6</a>: Clean Code & General Principle, Code Smell, and Refactoring
 7. Module 7: SOLID Principle and Microservices
 8. <a href="Final-Project">Final Project</a>
