@@ -23,21 +23,32 @@ module Refactoring
     end
     
     def returnable?
-      if ['BOOK', 'ELECTRONIC'].include?(@type)
-        true
-      else
-        false
+      case @type
+      when 'BOOK'
+        BookItem.new.returnable?
+      when 'ELECTRONIC'
+        ElectronicItem.new.returnable?
+      when 'FOOD'
+        FoodItem.new.returnable?
+      when 'DRINK'
+        DrinkItem.new.returnable?
+      when 'SNACK'
+        SnackItem.new.returnable?
       end
     end
 
     def tax_in_percent
       case @type
       when 'BOOK'
-        10
+        BookItem.new.tax_in_percent
       when 'ELECTRONIC'
-        15
-      else
-        5
+        ElectronicItem.new.tax_in_percent
+      when 'FOOD'
+        FoodItem.new.tax_in_percent
+      when 'DRINK'
+        DrinkItem.new.tax_in_percent
+      when 'SNACK'
+        SnackItem.new.tax_in_percent
       end
     end
 
