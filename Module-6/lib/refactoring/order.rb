@@ -17,7 +17,15 @@ module Refactoring
   
       price_after_tax = price + (@tax * price)
       total_price = price_after_tax + @delivery_cost
-    end  
+    end
+
+    def order_item_to_s(order_items)
+      to_s = ""
+      order_items.each do |order_item|
+        to_s += "#{order_item.quantity} #{order_item.item.name}"
+      end
+      to_s
+    end
 
     def order_summary_to_s
       food_items = Array.new
@@ -38,17 +46,11 @@ module Refactoring
       end
 
       to_s = "Food items:\n"
-      food_items.each do |food_item|
-        to_s += "#{food_item.quantity} #{food_item.item.name}"
-      end
+      to_s += order_item_to_s(food_items)
       to_s += "Drink items:\n"
-      drink_items.each do |drink_item|
-        to_s += "#{drink_item.quantity} #{drink_item.item.name}"
-      end
+      to_s += order_item_to_s(drink_items)
       to_s += "Snack items:\n"
-      snack_items.each do |snack_item|
-        to_s += "#{snack_item.quantity} #{snack_item.item.name}"
-      end
+      to_s += order_item_to_s(snack_items)
       return to_s
     end
   end
