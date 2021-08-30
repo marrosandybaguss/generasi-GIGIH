@@ -1,3 +1,9 @@
+require_relative 'itemtype/book_item'
+require_relative 'itemtype/drink_item'
+require_relative 'itemtype/electronic_item'
+require_relative 'itemtype/food_item'
+require_relative 'itemtype/snack_item'
+
 module Refactoring
   class Item
     attr_reader :name, :price, :type, :stock, :tags
@@ -44,13 +50,15 @@ module Refactoring
     def validate_tags(type, tags)
       case type
       when 'BOOK'
-        ['children', 'teen', 'adult', 'fiction', 'non-fiction'].include?(tags)
+        BookItem.new.tags_valid?(tags)
       when 'ELECTRONIC'
-        ['household','office','hobby','sports'].include?(tags)
+        ElectronicItem.new.tags_valid?(tags)
       when 'DRINK'
-        ['dairy', 'vegetable', 'fruit', 'coffee', 'tea'].include?(tags)
-      when 'FOOD', 'SNACK'
-        ['meat', 'dairy', 'vegetable', 'fruit', 'pastry'].include?(tags)
+        DrinkItem.new.tags_valid?(tags)
+      when 'FOOD'
+        FoodItem.new.tags_valid?(tags)
+      when 'SNACK'
+        SnackItem.new.tags_valid?(tags)
       else false
       end
     end
